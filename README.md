@@ -30,7 +30,37 @@
 ## 2. erd
 ![img_1.png](img_1.png)
 
+    USER {
+        long id PK "사용자ID"
+        string name "사용자명"
+    }
 
+    SPEAKER {
+        long id PK "강연자ID"
+        string name "강연자명"
+    }
+
+    LECTURES {
+        long id PK "특강ID"
+        long speaker_id FK "강연자ID"
+        string title "특강명"
+        timestamp lectureDate "특강날짜"
+        Integer capacity "정원"
+    }
+
+    LECTURE_HISTORY {
+        long id PK "신청내역ID"
+        long user_id FK "사용자ID"
+        long lecture_id FK "특강ID"
+        timestamp applyDate "신청날짜"
+        Boolean isApplied "신청여부"
+    }
+
+    USER ||--o{ LECTURE_HISTORY : ""
+    LECTURES ||--o{ LECTURE_HISTORY : ""
+    SPEAKER ||--o{ LECTURES : ""
+
+ 
 ### **ERD 설명**
 
 1. **USER 테이블**:
